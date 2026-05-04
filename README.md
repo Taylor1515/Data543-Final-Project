@@ -16,11 +16,11 @@ Predictions are visualized on an interactive choropleth map. Users can select an
 
 ## Repository Contents
 
-- `Hurricane_Impact_Model.ipynb` — the full Google Colab notebook (data prep, model training, evaluation, prediction, visualization)
-- `FemaHousingAssistanceLosses.xlsx` — historical FEMA loss data per county per storm
-- `HurricaneHazardData.xlsx` — per-county wind speeds and storm-level intensity for each historical storm
-- `SocialVulnerabilityData.xlsx` — county-level social vulnerability, resilience, and exposure features
-- `README.md` — this file
+- `Hurricane_Impact_Model.ipynb`: the full Google Colab notebook (data prep, model training, evaluation, prediction, visualization)
+- `FemaHousingAssistanceLosses.xlsx`: historical FEMA loss data per county per storm
+- `HurricaneHazardData.xlsx`: per-county wind speeds and storm-level intensity for each historical storm
+- `SocialVulnerabilityData.xlsx`: county-level social vulnerability, resilience, and exposure features
+- `README.md`: this file
 
 (Exact spreadsheet filenames may vary; the notebook auto-detects them by matching "Losses", "Hazard", and "Vulnerability" in the filename.)
 
@@ -28,11 +28,7 @@ Predictions are visualized on an interactive choropleth map. Users can select an
 
 ### 1. Download the repository
 
-Clone or download this repo so you have the three spreadsheets and the notebook locally:
-
-```
-git clone <repo-url>
-```
+Clone or download this repo so you have the three spreadsheets and the notebook locally.
 
 ### 2. Open the notebook in Google Colab
 
@@ -48,29 +44,29 @@ When you reach **Section 1, Cell 2** (the file upload prompt), upload all three 
 
 The sections are:
 
-1. **Setup** — installs packages and imports libraries
-2. **Data Preparation** — merges the three spreadsheets on storm name, year, and county FIPS
-3. **Data Exploration** — plots target distributions and feature correlations
-4. **Model Configuration** — sets hyperparameters and prepares the train/test split
-5. **Model Training** — trains the neural network (takes ~2-3 minutes)
-6. **Model Evaluation** — reports R squared, RMSE, MAE per target and shows diagnostic plots
-7. **Architecture Comparison (optional)** — sweeps a few configurations; skip if you only want to use the default
-8. **Save Model** — writes `hurricane_model.pt` so the prediction section can reload it
-9. **Interactive Prediction and Visualization** — provides a UI for selecting a storm and viewing predicted impacts on a map
+1. **Setup**: installs packages and imports libraries
+2. **Data Preparation**: merges the three spreadsheets on storm name, year, and county FIPS
+3. **Data Exploration**: plots target distributions and feature correlations
+4. **Model Configuration**: sets hyperparameters and prepares the train/test split
+5. **Model Training**: trains the neural network
+6. **Model Evaluation**: reports R squared, RMSE, MAE per target and shows diagnostic plots
+7. **Architecture Comparison**: sweeps a few configurations; skip if you only want to use the default
+8. **Save Model**: writes `hurricane_model.pt` so the prediction section can reload it
+9. **Interactive Prediction and Visualization**: provides a UI for selecting a storm and viewing predicted impacts on a map
 
 ### 4. Use the interactive predictor
 
 After running Cell 25 in Section 9, an interactive panel appears with three controls:
 
-- **Historical storm** — pick any storm from the training data
-- **Intensity multiplier** — scale all wind speeds up or down (0.5x to 1.5x) to ask hypothetical "what if" questions
-- **Map impact metric** — choose which of the five damage metrics drives the map's color scale
+- **Historical storm**: pick any storm from the training data
+- **Intensity multiplier**: scale all wind speeds up or down (0.5x to 1.5x) to ask hypothetical "what if" questions
+- **Map impact metric**: choose which of the five damage metrics drives the map's color scale
 
 Click **Predict and Map** to run the model and render the choropleth. Hover over any county to see the predicted value, the storm category, and the severity classification.
 
 ## How the Model Works
 
-The neural network is a fully-connected feedforward regressor implemented in PyTorch. It takes 17 input features per county-storm pair:
+The neural network is implemented in PyTorch. It takes 17 input features per county-storm pair:
 
 - Storm hazard: county wind speed, storm peak wind, storm minimum pressure
 - Social vulnerability: SOVI score, resilience score, coastal risk factor
